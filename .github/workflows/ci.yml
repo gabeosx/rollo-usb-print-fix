@@ -21,6 +21,8 @@ jobs:
         run: python3 audit.py
       - name: Test paced delivery
         run: python3 Tests/test_filter.py
+      - name: Test release publication offline
+        run: python3 Tests/test_release.py
       - name: Build and test universal packages
         run: ./build.sh
       - name: Inspect package payloads and app

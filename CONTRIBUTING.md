@@ -7,6 +7,7 @@ Before submitting a change:
 ```sh
 ./build.sh
 python3 Tests/test_filter.py
+python3 Tests/test_release.py
 python3 audit.py
 python3 verify_distribution.py
 ```

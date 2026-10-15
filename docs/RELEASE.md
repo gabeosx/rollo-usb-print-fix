@@ -2,12 +2,13 @@
 
 ## GitHub releases
 
-Push a tag matching `v` plus the repository's `VERSION` file, for example `v0.2.0`. The Release workflow builds universal Apple Silicon/Intel executables, signs the setup app and both packages, notarizes and staples them, and publishes the verified downloads with SHA-256 checksums. A prerelease version such as `0.3.0-rc.1` creates a GitHub prerelease.
+Push a tag matching `v` plus the repository's `VERSION` file. The Release workflow builds universal Apple Silicon/Intel executables, signs the setup app and both packages, notarizes and staples them, and publishes the verified downloads with SHA-256 checksums. A prerelease version such as `0.3.0-rc.1` creates a GitHub prerelease.
 
 ```sh
 # Update VERSION, commit, and push main before tagging.
-git tag v0.2.0
-git push origin v0.2.0
+rollo_version="$(cat VERSION)"
+git tag "v$rollo_version"
+git push origin "v$rollo_version"
 ```
 
 The workflow also accepts an existing tag through **Actions → Release → Run workflow**. It requires that the exact tagged commit belongs to the default branch and that the tag matches VERSION. Published releases cannot be overwritten. Failed runs can reuse an unpublished draft; a retry verifies its complete asset set before publication.
@@ -44,6 +45,7 @@ Use macOS with Xcode Command Line Tools and Python 3:
 ```sh
 ./build.sh
 python3 Tests/test_filter.py
+python3 Tests/test_release.py
 python3 verify_distribution.py
 python3 audit.py
 ```

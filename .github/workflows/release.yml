@@ -63,6 +63,7 @@ jobs:
         run: |
           python3 audit.py
           python3 Tests/test_filter.py
+          python3 Tests/test_release.py
       - name: Sign, notarize, and verify
         env:
           MACOS_APPLICATION_P12: ${{ secrets.MACOS_APPLICATION_P12 }}

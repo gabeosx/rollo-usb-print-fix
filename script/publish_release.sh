@@ -17,10 +17,10 @@ release = json.load(open(sys.argv[1]))
 assert release['tagName'] == sys.argv[2] and release['isDraft'], 'Published releases cannot be replaced.'
 PY
 else
-    rollo_flags=()
-    if [[ "$rollo_version" == *-* ]]; then rollo_flags+=(--prerelease); fi
-    gh release create "$RELEASE_TAG" --draft --verify-tag --target "$RELEASE_COMMIT" \
-      --title "Rollo USB Print Fix $rollo_version" --notes-file Packaging/ReleaseNotes.md "${rollo_flags[@]}"
+    rollo_create_args=("$RELEASE_TAG" --draft --verify-tag --target "$RELEASE_COMMIT"
+      --title "Rollo USB Print Fix $rollo_version" --notes-file Packaging/ReleaseNotes.md)
+    if [[ "$rollo_version" == *-* ]]; then rollo_create_args+=(--prerelease); fi
+    gh release create "${rollo_create_args[@]}"
 fi
 rollo_paths=()
 for rollo_name in "${rollo_names[@]}"; do rollo_paths+=("dist/$rollo_name"); done
