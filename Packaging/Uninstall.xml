@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="2">
+  <title>Remove Rollo USB Print Fix</title>
+  <options customize="never" require-scripts="true" allow-external-scripts="no"/>
+  <domains enable_anywhere="false" enable_currentUserHome="false" enable_localSystem="true"/>
+  <welcome file="uninstall.html" mime-type="text/html"/>
+  <conclusion file="uninstalled.html" mime-type="text/html"/>
+  <installation-check script="checkRemoval()"/>
+  <volume-check script="true">
+    <allowed-os-versions><os-version min="13.0"/></allowed-os-versions>
+  </volume-check>
+  <script><![CDATA[
+    function checkRemoval() {
+      if (!system.files.fileExistsAtPath('/Library/Application Support/Rollo USB Pacing/recovery.json')) return true;
+      my.result.type = 'Fatal';
+      my.result.title = 'Recovery needed first';
+      my.result.message = 'Recover the interrupted setup using the administrator guide before removing the repair.';
+      return false;
+    }
+  ]]></script>
+  <choices-outline><line choice="remove"/></choices-outline>
+  <choice id="remove" visible="false" title="Remove pacing"><pkg-ref id="org.rollo-usb-pacing.uninstall"/></choice>
+  <pkg-ref id="org.rollo-usb-pacing.uninstall" version="@VERSION@" onConclusion="none">uninstall-component.pkg</pkg-ref>
+</installer-gui-script>

@@ -1,0 +1,27 @@
+name: Build and test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Audit source
+        run: python3 audit.py
+      - name: Test paced delivery
+        run: python3 Tests/test_filter.py
+      - name: Build and test universal packages
+        run: ./build.sh
+      - name: Inspect package payloads and app
+        run: python3 verify_distribution.py

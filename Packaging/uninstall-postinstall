@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+if [ "${3:-/}" != / ]; then
+    echo 'Run the uninstaller on the running macOS startup disk only.' >&2
+    exit 1
+fi
+rollo_scripts_dir=$(/usr/bin/dirname "$0")
+exec "$rollo_scripts_dir/rollo-pacing" uninstall

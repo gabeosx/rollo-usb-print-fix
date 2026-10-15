@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="2">
+  <title>Rollo USB Print Fix</title>
+  <options customize="never" require-scripts="true" allow-external-scripts="no"/>
+  <domains enable_anywhere="false" enable_currentUserHome="false" enable_localSystem="true"/>
+  <welcome file="welcome.html" mime-type="text/html"/>
+  <readme file="readme.html" mime-type="text/html"/>
+  <conclusion file="conclusion.html" mime-type="text/html"/>
+  <installation-check script="checkSetup()"/>
+  <volume-check script="true">
+    <allowed-os-versions><os-version min="13.0"/></allowed-os-versions>
+  </volume-check>
+  <script><![CDATA[
+    function checkSetup() {
+      if (system.files.fileExistsAtPath('/Library/Application Support/Rollo USB Pacing/recovery.json')) {
+        my.result.type = 'Fatal';
+        my.result.title = 'Rollo setup needs attention';
+        my.result.message = 'A previous setup was interrupted. Stop sending labels and ask your administrator to follow the recovery guide before reinstalling.';
+        return false;
+      }
+      if (!system.files.fileExistsAtPath('/Library/Printers/Rollo/rastertorollo')) {
+        my.result.type = 'Fatal';
+        my.result.title = 'Rollo setup needs attention';
+        my.result.message = 'Install the official Rollo USB driver for macOS, then add the USB printer in System Settings > Printers & Scanners. Reopen this installer when that is done.';
+        return false;
+      }
+      return true;
+    }
+  ]]></script>
+  <choices-outline><line choice="pacing"/></choices-outline>
+  <choice id="pacing" visible="false" title="Rollo USB Print Fix"><pkg-ref id="org.rollo-usb-pacing.install"/></choice>
+  <pkg-ref id="org.rollo-usb-pacing.install" version="@VERSION@" onConclusion="none">install-component.pkg</pkg-ref>
+</installer-gui-script>
