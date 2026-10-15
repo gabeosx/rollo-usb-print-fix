@@ -35,7 +35,7 @@ Create a GitHub Actions environment named `release`, with these environment secr
 
 Keep credentials and certificate backups outside the source tree. Use `gh secret set --env release` with stdin or GitHub's secret-entry UI; never put values in workflow YAML, issues or release notes. See [GitHub's secret configuration](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).
 
-Restrict the release environment to version tags and the default branch. Limit repository write access to trusted maintainers: tagged source executes with publishing credentials. Pull-request builds use a separate workflow without signing secrets. The release job imports keys into a temporary Keychain and deletes it on exit. It derives signing identities from the supplied certificates and checks their team and type. No provisioning profiles or special app entitlements are needed.
+Restrict the release environment to version tags and the default branch, and enable GitHub release immutability so published downloads and tags cannot be replaced. Limit repository write access to trusted maintainers: tagged source executes with publishing credentials. Pull-request builds use a separate workflow without signing secrets. The release job imports keys into a temporary Keychain and deletes it on exit. It derives signing identities from the supplied certificates and checks their team and type. No provisioning profiles or special app entitlements are needed. Renew expiring certificates and update the corresponding secrets before the next release.
 
 ## Local development
 

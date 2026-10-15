@@ -8,4 +8,4 @@ The new filter is installed root-owned, mode 755. Management uses fixed system e
 
 The original vendor converter is an external prerequisite and remains a separate trusted component. This workaround does not audit or sandbox that converter. No runtime binaries or PPDs from the vendor or Apple are included.
 
-Until a private reporting channel exists, do not post exploit details or private artifacts publicly. Contact the repository maintainer privately once the repository's publisher and contact have been established. The local source preview is not a production security certification.
+Report vulnerabilities through [GitHub private vulnerability reporting](https://github.com/gabeosx/rollo-usb-print-fix/security/advisories/new). Keep exploit details and private artifacts out of public issues.

@@ -23,4 +23,4 @@ For hardware reports, describe:
 - Whether the job was one label, multiple copies or a multi-page batch.
 - Installation/removal/recovery result and a sanitized error description.
 
-Do not attach shipping labels, customer information, serial numbers, signed URLs, full logs, recovery backups or raw printer output. A successful software job alone is not physical validation. Follow the release qualification checklist when adding support for more configurations.
+Do not attach shipping labels, customer information, serial numbers, signed URLs, full logs, recovery backups or raw printer output. A successful software job alone is not physical validation. Follow the deployment checks in [the release guide](docs/RELEASE.md) when adding support for more configurations.
